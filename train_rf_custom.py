@@ -23,11 +23,11 @@ args = parser.parse_args()
 import pandas as pd
 
 # Cargar tu dataframe desde CSV
-df = pd.read_csv("tu_archivo.csv")  # Reemplaza con tu archivo
+df = pd.read_csv("cancer_data.csv")  # Reemplaza con tu archivo
 
 # Separa features (X) y target (y)
-X = df.drop("nombre_columna_target", axis=1)  # Reemplaza con la columna objetivo
-y = df["nombre_columna_target"]
+X = df.drop("target", axis=1)  # Reemplaza con la columna objetivo
+y = df["target"]
 
 X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.2, stratify=y, random_state=42
