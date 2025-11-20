@@ -1,12 +1,12 @@
-# load_model_heloc.py  ───────────────────────────────────────────────────────────
+# load_model_heloc_sin_pca.py  ──────────────────────────────────────────────────
 import mlflow
 import pandas as pd
 
 # Configurar URI de MLflow
 mlflow.set_tracking_uri("./mlruns")
 
-# Run ID del mejor modelo (optimized_v1 - con 71.82% accuracy)
-best_run_id = "3f57eaf39e9b4757a958501e6614a910"
+# Run ID del mejor modelo (sin_pca_v2 - con 72.94% accuracy)
+best_run_id = "9b5024f634754273bf12f6b3c8293e21"
 
 try:
     # Cargar el modelo
@@ -36,11 +36,29 @@ try:
     # Predicción con datos nuevos
     print(f"\n🔮 Ejemplo de predicción:")
     nuevo_registro = pd.DataFrame({
-        'PC1': [-1.5],
-        'PC2': [0.5],
-        'PC3': [1.2],
         'ExternalRiskEstimate': [65.0],
-        'NetFractionRevolvingBurden': [40.0]
+        'MSinceOldestTradeOpen': [200],
+        'MSinceMostRecentTradeOpen': [12],
+        'AverageMInFile': [80],
+        'NumSatisfactoryTrades': [10],
+        'NumTrades60Ever2DerogPubRec': [0],
+        'NumTrades90Ever2DerogPubRec': [0],
+        'PercentTradesNeverDelq': [95],
+        'MSinceMostRecentDelq': [48],
+        'MaxDelq2PublicRecLast12M': [1],
+        'MaxDelqEver': [1],
+        'NumTotalTrades': [15],
+        'NumTradesOpeninLast12M': [2],
+        'PercentInstallTrades': [30],
+        'MSinceMostRecentInqexcl7days': [6],
+        'NumInqLast6M': [1],
+        'NumInqLast6Mexcl7days': [1],
+        'NetFractionRevolvingBurden': [40.0],
+        'NetFractionInstallBurden': [10.0],
+        'NumRevolvingTradesWBalance': [5],
+        'NumInstallTradesWBalance': [2],
+        'NumBank2NatlTradesWHighUtilization': [0],
+        'PercentTradesWBalance': [80]
     })
     prediccion_nueva = model.predict(nuevo_registro)
     print(f"   Predicción: {prediccion_nueva[0]}")
