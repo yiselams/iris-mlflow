@@ -18,7 +18,7 @@ parser.add_argument("--run_name", type=str, default=None)
 args = parser.parse_args()
 
 # -------------------- Datos ----------------------------------------------------
-df = pd.read_csv("heloc_procesado_regresion.csv")
+df = pd.read_csv("heloc_procesado.csv")
 
 # Separa features (X) y target (y)
 X = df.drop("RiskPerformance", axis=1)  # Features: PC1, PC2, PC3, ExternalRiskEstimate, NetFractionRevolvingBurden
